@@ -22,16 +22,16 @@ public class AddTwoNumbers {
             numbers = new AddTwoNumbers();
         return numbers;
     }
-    public void show(ListNode node){
-        new ListNode().show(node);
+    public void show(ListNodes node){
+        new ListNodes().show(node);
     }
 
-    public ListNode add(int a[]){
-        return new ListNode().addNums(a);
+    public ListNodes add(int a[]){
+        return new ListNodes().addNums(a);
     }
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode l3 = new ListNode(0);
-        ListNode head = l3;
+    public ListNodes addTwoNumbers(ListNodes l1, ListNodes l2) {
+        ListNodes l3 = new ListNodes(0);
+        ListNodes head = l3;
         int carry = 0;
         while (l1 != null || l2 != null) {
             if (l1 != null) {
@@ -42,39 +42,39 @@ public class AddTwoNumbers {
                 carry += l2.val;
                 l2 = l2.next;
             }
-            l3.next = new ListNode(carry % 10);
+            l3.next = new ListNodes(carry % 10);
             carry /= 10;
             l3 = l3.next;
         }
         if (carry == 1) {
-            l3.next = new ListNode(carry);
+            l3.next = new ListNodes(carry);
         }
         return head.next;
     }
 }
 
-class ListNode {
+class ListNodes {
     int val;
-    ListNode next;
+    ListNodes next;
 
-    ListNode(){}
+    ListNodes(){}
 
-    ListNode(int x) {
+    ListNodes(int x) {
         val = x;
     }
-    void show(ListNode node){
+    void show(ListNodes node){
         StringBuilder s1 = new StringBuilder(val);
-        ListNode tmp = node.next;
+        ListNodes tmp = node.next;
         while (tmp != null){
             s1.append("->" + tmp.val );
         }
         System.out.println(s1);
     }
-    public ListNode addNums(int a[]){
-        ListNode tmp = new ListNode(a[0]);
+    public ListNodes addNums(int a[]){
+        ListNodes tmp = new ListNodes(a[0]);
         this.next = tmp;
         for (int i = 1; i < a.length; i++){
-            tmp.next = new ListNode(a[i]);
+            tmp.next = new ListNodes(a[i]);
             tmp = tmp.next;
         }
         return this.next;

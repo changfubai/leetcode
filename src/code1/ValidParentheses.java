@@ -1,0 +1,23 @@
+package code1;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
+public class ValidParentheses {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        //字符串转字符数组，速度更快
+        for (char c : s.toCharArray()) {
+            if (c == '(')
+                stack.push(')');
+            else if (c == '{')
+                stack.push('}');
+            else if (c == '[')
+                stack.push(']');
+            else if (stack.isEmpty() || stack.pop() != c)
+                return false;
+        }
+        return stack.isEmpty();
+    }
+}
