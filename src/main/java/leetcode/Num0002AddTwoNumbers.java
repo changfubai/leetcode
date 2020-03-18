@@ -1,7 +1,5 @@
 package leetcode;
 
-import leetcode.common.ListNode;
-
 /**
  You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse
  order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
@@ -46,11 +44,12 @@ public class Num0002AddTwoNumbers {
                 l2 = l2.next;
             }
             if (l1 == null && l2 == null && carry != 0) {
-                    tmp.next = new ListNode(carry);
+                tmp.next = new ListNode(carry);
             }
             return root.next;
         }
     }
+
     static class ListNode {
         int val;
         ListNode next;
