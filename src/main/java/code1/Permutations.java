@@ -1,11 +1,7 @@
 package code1;
 
-import com.sun.deploy.util.ArrayUtil;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by changfubai96@gmail.com on 2018/7/16
