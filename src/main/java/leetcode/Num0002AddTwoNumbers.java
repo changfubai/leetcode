@@ -1,5 +1,7 @@
 package leetcode;
 
+import org.junit.Assert;
+
 /**
  You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse
  order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
@@ -21,30 +23,48 @@ public class Num0002AddTwoNumbers {
             1、头结点为空的情况
             2、最后遇到空节点时，需要将另一链表接在最后并加上进位
 
-         思考： 这个题的解法也可以作为大数想加或相乘的解法。
+         思考： 这个题的解法也可以作为大数相加或相乘的解法。
         */
+        ListNode l1 = new ListNode(2);
+        l1.next = new ListNode(4);
+        l1.next.next = new ListNode(3);
+        ListNode l2 = new ListNode(5);
+        l2.next = new ListNode(6);
+        l2.next.next = new ListNode(4);
+        ListNode root = new Solution().addTwoNumbers(l1, l2);
+        Assert.assertEquals(7, root.val);
+        Assert.assertEquals(0, root.next.val);
+        Assert.assertEquals(8, root.next.next.val);
+        // 2 ms	41 MB
+
+        System.out.println("success!");
     }
 
     static class Solution {
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
             int carry = 0;
-            if (l1 == null) {
-                return l2;
-            }
-            if (l2 == null) {
-                return l1;
-            }
             ListNode root = new ListNode(carry);
             ListNode tmp = root;
-            while (l1 != null && l2 != null) {
-                tmp.next = new ListNode((l1.val + l2.val) % 10 + carry);
-                carry = root.val = (l1.val + l2.val) / 10;
+            // 只要进位不为空，就需要继续遍历增加节点
+            while (l1 != null && l2 != null || carry != 0) {
+                int curSum = carry;
+                if (l1 != null) {
+                    curSum += l1.val;
+                    l1 = l1.next;
+                }
+                if (l2 != null) {
+                    curSum += l2.val;
+                    l2 = l2.next;
+                }
+                carry = curSum / 10;
+                tmp.next = new ListNode(curSum % 10);
                 tmp = tmp.next;
-                l1 = l1.next;
-                l2 = l2.next;
             }
-            if (l1 == null && l2 == null && carry != 0) {
-                tmp.next = new ListNode(carry);
+            if (l1 != null) {
+                tmp.next = l1;
+            }
+            if (l2 != null) {
+                tmp.next = l2;
             }
             return root.next;
         }
